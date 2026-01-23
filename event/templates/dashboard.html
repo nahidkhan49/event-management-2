@@ -1,0 +1,122 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Organizer Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+
+  <aside class="w-64 bg-white shadow-md min-h-screen sticky top-0">
+    <div class="p-6 border-b border-gray-200">
+      <h2 class="text-2xl font-bold text-pink-600">EventManager</h2>
+    </div>
+    <nav class="mt-6">
+      <ul>
+        <li>
+          <a href="{% url 'home' %}" class="flex items-center px-6 py-3 hover:bg-pink-100 hover:text-pink-600 transition text-gray-700">
+            <i class="fa-solid fa-tachometer-alt mr-3"></i> Home
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'category-list' %}" class="flex items-center px-6 py-3 hover:bg-pink-100 hover:text-pink-600 transition text-gray-700">
+            <i class="fa-solid fa-list-ul mr-3"></i> Categories
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'event-list' %}" class="flex items-center px-6 py-3 hover:bg-pink-100 hover:text-pink-600 transition text-gray-700">
+            <i class="fa-solid fa-calendar-days mr-3"></i> Events
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'participant-list' %}" class="flex items-center px-6 py-3 hover:bg-pink-100 hover:text-pink-600 transition text-gray-700">
+            <i class="fa-solid fa-users mr-3"></i> Participants
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center px-6 py-3 hover:bg-pink-100 hover:text-pink-600 transition text-gray-700">
+            <i class="fa-solid fa-cog mr-3"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+
+  <main class="flex-1 p-8 overflow-auto">
+
+    <h1 class="text-3xl font-bold mb-8 text-gray-800">Organizer Dashboard</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+        <div class="text-5xl mb-3 text-blue-600">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="text-xl font-semibold text-gray-600">Total Participants</div>
+        <div class="text-4xl font-bold text-gray-800">{{ total_participant }}</div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+        <div class="text-5xl mb-3 text-pink-600">
+          <i class="fa-solid fa-calendar-days"></i>
+        </div>
+        <div class="text-xl font-semibold text-gray-600">Total Events</div>
+        <div class="text-4xl font-bold text-gray-800">{{ total_event }}</div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+        <div class="text-5xl mb-3 text-green-600">
+          <i class="fa-solid fa-calendar-plus"></i>
+        </div>
+        <div class="text-xl font-semibold text-gray-600">Upcoming Events</div>
+        <div class="text-4xl font-bold text-gray-800">{{ upcomming_event }}</div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+        <div class="text-5xl mb-3 text-gray-700">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+        <div class="text-xl font-semibold text-gray-600">Past Events</div>
+        <div class="text-4xl font-bold text-gray-800">{{ past_event }}</div>
+      </div>
+    </div>
+
+  
+    <section class="bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-2xl font-semibold mb-6 flex items-center text-gray-700">
+        Today's Events <i class="fa-solid fa-calendar-day ml-3 text-pink-600"></i>
+      </h2>
+
+
+
+
+
+      {% if today_event %}
+      <ul class="space-y-4">
+        {% for event in today_event %}
+          <li class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-50 p-4 rounded-md hover:bg-gray-100 transition">
+            <div>
+              <h3 class="font-semibold text-lg text-gray-800">{{ event.name }}</h3>
+              <p class="text-gray-600 text-sm">{{ event.description }}</p>
+            </div>
+            <div class="text-gray-600 mt-3 sm:mt-0 flex space-x-6">
+              <span><i class="fa-solid fa-calendar-days mr-1 text-pink-500"></i> {{ event.date }}</span>
+              <span><i class="fa-solid fa-clock mr-1 text-pink-500"></i> {{ event.time }}</span>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p class="text-gray-500">No events for today.</p>
+      {% endif %}
+    </section>
+
+  </main>
+</body>
+</html>

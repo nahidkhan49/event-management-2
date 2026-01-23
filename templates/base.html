@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Management</title>
+
+   
+    <script src="https://cdn.tailwindcss.com"></script>
+
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body class="bg-gray-100 min-h-screen max-w-7xl mx-auto px-6">
+
+
+{% include "navbar.html" %}
+
+
+<section class="relative overflow-hidden rounded-t-3xl">
+  
+  <img src="{% static 'images/banner.jpg' %}" class="absolute inset-0 w-full h-full object-cover brightness-75" alt="Event Banner">
+
+  
+  <div class="absolute inset-0 bg-gradient-to-r from-pink-500/40 via-purple-500/30 to-indigo-500/40"></div>
+  <div class="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+
+
+  <span class="absolute top-10 left-5 w-20 h-20 bg-pink-400/30 rounded-full animate-pulse"></span>
+  <span class="absolute top-32 right-10 w-32 h-32 bg-indigo-400/20 rounded-full animate-spin-slow"></span>
+  <span class="absolute bottom-16 left-20 w-24 h-24 bg-purple-400/25 rounded-full animate-ping"></span>
+
+ 
+  <div class="relative max-w-7xl mx-auto px-6 py-40 text-center">
+  
+    <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 opacity-0 animate-fadeInDown">
+      Manage Your Events Effortlessly
+    </h1>
+   
+    <p class="text-lg md:text-xl text-gray-200 mb-8 opacity-0 animate-fadeInUp">
+      From planning to execution, streamline every part of your events with ease.
+    </p>
+    
+    <a href="{% url 'event-list' %}" class="inline-block px-8 py-3 rounded-lg font-semibold text-white bg-pink-500 bg-opacity-80 hover:bg-opacity-100 backdrop-blur-md shadow-lg hover:scale-105 transition-transform duration-300 opacity-0 animate-fadeInUp delay-200">
+      View Events
+    </a>
+  </div>
+</section>
+
+
+<style>
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-fadeInDown { animation: fadeInDown 1s forwards; }
+.animate-fadeInUp { animation: fadeInUp 1s forwards; }
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+</style>
+
+
+
+<section class="bg-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+   
+    <h1 class="text-4xl font-bold text-gray-800 mb-4">Our Event Management Services</h1>
+    <p class="text-gray-600 mb-12">
+      We make your events unforgettable! Explore our featured events and services below.
+    </p>
+
+    
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      
+      
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+        <img class="w-full h-48 object-cover" src="{% static 'images/event1.jpg' %}" alt="Event 1">
+        <div class="p-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-2">Corporate Events</h2>
+          <p class="text-gray-600 mb-4">
+            Professional planning and management for corporate gatherings, conferences, and seminars.
+          </p>
+          <a href="#services" class="inline-block px-4 py-2 bg-pink-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-300">
+            Learn More
+          </a>
+        </div>
+      </div>
+
+     
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+        <img class="w-full h-48 object-cover" src="{% static 'images/event2.jpg' %}" alt="Event 2">
+        <div class="p-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-2">Weddings</h2>
+          <p class="text-gray-600 mb-4">
+            Create magical wedding experiences with our expert planning and coordination.
+          </p>
+          <a href="#services" class="inline-block px-4 py-2 bg-pink-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-300">
+            Learn More
+          </a>
+        </div>
+      </div>
+
+     
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+        <img class="w-full h-48 object-cover" src="{% static 'images/event3.jpg' %}" alt="Event 3">
+        <div class="p-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-2">Birthday & Private Parties</h2>
+          <p class="text-gray-600 mb-4">
+            Fun, vibrant, and seamless party planning for birthdays and private celebrations.
+          </p>
+          <a href="#services" class="inline-block px-4 py-2 bg-pink-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-300">
+            Learn More
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class="max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-3xl font-bold text-center mb-12">Our Services</h2>
+    <div class="grid md:grid-cols-4 gap-8 text-center">
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-2">
+            <i class="fa-solid fa-calendar-check text-pink-500 text-4xl mb-4"></i>
+            <h4 class="font-semibold text-lg mb-2">Event Planning</h4>
+            <p class="text-gray-500 text-sm">Plan events easily with a smooth process.</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-2">
+            <i class="fa-solid fa-location-dot text-pink-500 text-4xl mb-4"></i>
+            <h4 class="font-semibold text-lg mb-2">Great Locations</h4>
+            <p class="text-gray-500 text-sm">Choose the perfect venue for every event.</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-2">
+            <i class="fa-solid fa-microphone text-pink-500 text-4xl mb-4"></i>
+            <h4 class="font-semibold text-lg mb-2">Top Speakers</h4>
+            <p class="text-gray-500 text-sm">Professional speakers for impactful sessions.</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-2">
+            <i class="fa-solid fa-users text-pink-500 text-4xl mb-4"></i>
+            <h4 class="font-semibold text-lg mb-2">Participant Management</h4>
+            <p class="text-gray-500 text-sm">Manage attendees smoothly and efficiently.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="max-w-7xl mx-auto px-6 pb-20">
+    <h3 class="text-3xl font-bold mb-10 text-center">Upcoming Events</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+        {% for evt in events %}
+        <div class="bg-white rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 p-6">
+            <h4 class="font-bold text-xl mb-2">{{ evt.name }}</h4>
+            <p class="text-sm text-gray-500 mb-1">
+                <i class="fa-solid fa-calendar-days"></i> {{ evt.date }}
+            </p>
+            <p class="text-sm text-gray-500 mb-3">
+                <i class="fa-solid fa-location-dot"></i> {{ evt.location }}
+            </p>
+            <a href="#" class="text-pink-500 font-semibold hover:underline">View Details</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<footer class="bg-gray-900/80 backdrop-blur-md rounded-t-3xl text-white pt-16">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+
+    
+    <div>
+      <h4 class="text-2xl font-extrabold mb-3 drop-shadow-lg">EventManage</h4>
+      <p class="text-sm drop-shadow-sm">
+        A modern, full-featured event management system for every occasion. Making your events memorable and seamless.
+      </p>
+    </div>
+
+    
+    <div>
+      <h4 class="text-lg font-bold mb-3">Quick Links</h4>
+      <ul class="text-sm space-y-2">
+        <li>
+          <a href="/" class="hover:text-pink-500 transition-colors duration-300">Home</a>
+        </li>
+        <li>
+          <a href="{% url 'event-list' %}" class="hover:text-pink-500 transition-colors duration-300">Events</a>
+        </li>
+        <li>
+          <a href="{% url 'category-list' %}" class="hover:text-pink-500 transition-colors duration-300">Category</a>
+        </li>
+        <li>
+          <a href="{% url 'dashboard' %}" class="hover:text-pink-500 transition-colors duration-300">Dashboard</a>
+        </li>
+      </ul>
+    </div>
+
+    
+    <div>
+      <h4 class="text-lg font-bold mb-3">Contact</h4>
+      <p class="text-sm">nahid822399@gmail.com</p>
+      <p class="text-sm">+8801719 822399</p>
+      <div class="flex space-x-4 mt-3">
+        <a href="#" class="hover:text-pink-500 transition-colors duration-300">Facebook</a>
+        <a href="#" class="hover:text-pink-500 transition-colors duration-300">Instagram</a>
+        <a href="#" class="hover:text-pink-500 transition-colors duration-300">LinkedIn</a>
+      </div>
+    </div>
+
+  </div>
+
+ 
+  <div class="text-center text-sm py-6 mt-12 border-t border-gray-700 text-gray-400">
+    © 2026 Event Management. All rights reserved.
+  </div>
+</footer>
+
+
+
+</body>
+</html>
