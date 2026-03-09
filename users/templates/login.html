@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | EventManager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white shadow-lg rounded-xl w-full max-w-md p-8">
+        
+        
+        <h2 class="text-3xl font-bold text-center text-pink-600 mb-6">
+            Login to Your Account
+        </h2>
+
+        
+        {% if form.errors %}
+            <div class="mb-4 p-3 bg-red-100 text-red-600 rounded-lg text-sm">
+                Invalid username or password. Please try again.
+            </div>
+        {% endif %}
+
+        
+        <form method="POST" class="space-y-5">
+            {% csrf_token %}
+
+            
+            <div>
+                <label class="block text-gray-700 mb-2 font-medium">
+                    Username
+                </label>
+                {{ form.username }}
+            </div>
+
+            
+            <div>
+                <label class="block text-gray-700 mb-2 font-medium">
+                    Password
+                </label>
+                {{ form.password }}
+            </div>
+
+            
+            <button type="submit"
+                class="w-full bg-pink-600 text-white py-2 rounded-lg hover:bg-pink-700 transition duration-300">
+                Login
+            </button>
+        </form>
+
+        
+        <div class="mt-6 text-center text-sm text-gray-600">
+            Don't have an account?
+            <a href="{% url 'sign_up' %}" class="text-pink-600 hover:underline">
+                Register
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

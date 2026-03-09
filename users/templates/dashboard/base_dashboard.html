@@ -1,0 +1,114 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Dashboard{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex">
+
+
+<aside class="w-64 bg-white shadow-md min-h-screen">
+  <div class="p-6 border-b">
+    <h2 class="text-2xl font-bold text-pink-600">EventManager</h2>
+  </div>
+
+  <nav class="mt-6">
+  <ul>
+
+    
+    <li>
+      <a href="{% url 'home' %}" class="flex px-6 py-3 hover:bg-pink-100">
+        <i class="fa-solid fa-home mr-3"></i> Home
+      </a>
+    </li>
+
+    
+    {% if user.groups.all.0.name == "Admin" %}
+      <li>
+        <a href="{% url 'admin_dashboard' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-chart-line mr-3"></i> Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'group_list' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-users mr-3"></i> Groups
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'category-list' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-list mr-3"></i> Categories
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'event-list' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-calendar mr-3"></i> Events
+        </a>
+      </li>
+    {% endif %}
+
+
+    
+    {% if user.groups.all.0.name == "Organizer" %}
+      <li>
+        <a href="{% url 'organizer_dashboard' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-chart-line mr-3"></i> Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'event-list' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-calendar mr-3"></i> Events
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'category-list' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-list mr-3"></i> Categories
+        </a>
+      </li>
+    {% endif %}
+
+
+    
+    {% if user.groups.all.0.name == "Participant" %}
+      <li>
+        <a href="{% url 'participant_dashboard' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-chart-line mr-3"></i> Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'event-list' %}" class="flex px-6 py-3 hover:bg-pink-100">
+          <i class="fa-solid fa-calendar mr-3"></i> Events
+        </a>
+      </li>
+    {% endif %}
+
+    
+    <li>
+      <form method="POST" action="{% url 'sign_out' %}">
+        {% csrf_token %}
+        <button class="flex px-6 py-3 hover:bg-red-100 text-red-600 w-full text-left">
+          <i class="fa-solid fa-right-from-bracket mr-3"></i> Logout
+        </button>
+      </form>
+    </li>
+
+  </ul>
+</nav>
+</aside>
+
+
+<main class="flex-1 p-8">
+  <h1 class="text-3xl font-bold mb-6">{% block header %}{% endblock %}</h1>
+  {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

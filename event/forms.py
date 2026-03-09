@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event,Category,Participant
+from .models import Event,Category
 
 
 class StyledFormMixin:
@@ -57,14 +57,9 @@ class CategoryModelForm(StyledFormMixin,forms.ModelForm):
         model=Category
         fields=['name','description']
         
-class ParticipantModelForm(StyledFormMixin,forms.ModelForm):
-    class Meta:
-        model=Participant
-        fields=['name','email','event']
-        widgets={
-            'event':forms.CheckboxSelectMultiple()
-        }
+
     
+
 
 
 

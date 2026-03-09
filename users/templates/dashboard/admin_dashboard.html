@@ -1,0 +1,72 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+{% block header %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+
+  <div class="bg-white p-6 rounded shadow text-center">
+    <p class="text-gray-600">Total Users</p>
+    <p class="text-3xl font-bold">{{ total_user }}</p>
+  </div>
+
+  <div class="bg-white p-6 rounded shadow text-center">
+    <p class="text-gray-600">Total Events</p>
+    <p class="text-3xl font-bold">{{ total_event }}</p>
+  </div>
+
+  <div class="bg-white p-6 rounded shadow text-center">
+    <p class="text-gray-600">Upcoming Events</p>
+    <p class="text-3xl font-bold">{{ upcoming_event }}</p>
+  </div>
+
+  <div class="bg-white p-6 rounded shadow text-center">
+    <p class="text-gray-600">Past Events</p>
+    <p class="text-3xl font-bold">{{ past_event }}</p>
+  </div>
+
+</div>
+
+
+<div class="bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-semibold mb-4">All Users</h2>
+
+  <table class="min-w-full border">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-3 text-left">Username</th>
+        <th class="p-3 text-left">Email</th>
+        <th class="p-3 text-left">Role</th>
+        <th class="p-3 text-left">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr class="border-t">
+        <td class="p-3">{{ user.username }}</td>
+        <td class="p-3">{{ user.email }}</td>
+        <td class="p-3">
+          {% for group in user.groups.all %}
+            <span class="bg-pink-100 px-2 py-1 rounded text-xs">{{ group.name }}</span>
+          {% empty %}
+            No Role
+          {% endfor %}
+        </td>
+        <td class="p-3">
+          {% if user.is_active %}
+            <span class="text-green-600">Active</span>
+          {% else %}
+            <span class="text-red-600">Inactive</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}

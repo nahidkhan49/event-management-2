@@ -1,0 +1,16 @@
+{% extends "base_dashboard.html" %}
+{% block content %}
+
+<h1 class="text-3xl font-bold mb-6">My RSVP Events</h1>
+
+<div class="bg-white p-6 rounded shadow">
+  {% for event in events %}
+    <div class="border-b py-2">
+      {{ event.name }} - {{ event.date }}
+    </div>
+  {% empty %}
+    <p>No RSVP events yet.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

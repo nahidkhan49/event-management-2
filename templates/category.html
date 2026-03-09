@@ -40,14 +40,14 @@
 
           
           <div class="flex gap-3">
-          
+            {% if user.groups.all.0.name == "Admin" or user.groups.all.0.name == "Organizer"  %}
               <a href="{% url 'update-category' id=cat.id %}"
                 class="px-4 py-2 bg-gray-500 text-white rounded-full text-sm
                         hover:bg-gray-600 transition flex items-center gap-1">
                   <i class="fa-solid fa-pen"></i>
                   Edit
               </a>
-
+              
               <a href="{% url 'delete-category' id=cat.id %}"
                 class="px-4 py-2 bg-red-500 text-white rounded-full text-sm
                         hover:bg-red-600 transition flex items-center gap-1"
@@ -55,6 +55,7 @@
                   <i class="fa-solid fa-trash"></i>
                   Delete
               </a>
+              {% endif %}
           </div>
       </div>
       {% endfor %}

@@ -8,5 +8,6 @@ from event.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("event/", include("event.urls")),
+    path("users/", include("users.urls")),
     path('',home,name='home'),
 ]+debug_toolbar_urls()

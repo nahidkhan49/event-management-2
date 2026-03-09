@@ -1,0 +1,31 @@
+
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}Participant Dashboard{% endblock %}
+{% block header %}Participant Dashboard{% endblock %}
+
+{% block sidebar %}
+<li>
+  <a href="{% url 'home' %}" class="flex px-6 py-3 hover:bg-pink-100">
+    <i class="fa-solid fa-calendar mr-3"></i> My Registered Events
+  </a>
+</li>
+<li>
+<li>
+  <a href="#" class="flex px-6 py-3 hover:bg-pink-100">
+    <i class="fa-solid fa-calendar mr-3"></i> My Registered Events
+  </a>
+</li>
+<li>
+  <a href="#" class="flex px-6 py-3 hover:bg-pink-100">
+    <i class="fa-solid fa-user mr-3"></i> Profile
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-semibold">My Activity</h2>
+  <p>Registered Events: {{ registered_event }}</p>
+</div>
+{% endblock %}

@@ -1,62 +1,100 @@
-
-<nav class="sticky top-0 z-50 bg-white/70 backdrop-blur-md shadow-lg rounded-lg  my-7">
+<nav class="sticky top-0 z-50 bg-white/70 backdrop-blur-md shadow-lg rounded-lg my-7">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
     
     
-    <a href="/" class="text-2xl font-extrabold text-gray-900 hover:text-pink-500 transition-colors duration-300">EventManage</a>
-    
-    
-    <ul class="hidden md:flex space-x-8 text-gray-800 font-medium">
-      <li>
-        <a href="/" class="relative hover:text-pink-500 transition-colors duration-300">
-          Home
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-500 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-      </li>
-      <li>
-        <a href="{% url 'event-list' %}" class="relative hover:text-pink-500 transition-colors duration-300">
-          Events
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-500 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-      </li>
-      <li>
-        <a href="{% url 'category-list' %}" class="relative hover:text-pink-500 transition-colors duration-300">
-          Category
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-500 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-      </li>
-    </ul>
-
-  
-    <a href="{% url 'dashboard' %}" class="hidden md:inline-block bg-pink-500 text-white px-4 py-2 rounded-lg font-semibold shadow-lg hover:bg-pink-600 hover:scale-105 transition-transform duration-300">
-      Dashboard
+    <a href="/" class="text-2xl font-extrabold text-gray-900 hover:text-pink-500 transition-colors duration-300">
+      EventManage
     </a>
+    
+    
+    <ul class="hidden md:flex space-x-8 text-gray-800 font-medium items-center">
+      
+      <li><a href="/" class="hover:text-pink-500 transition">Home</a></li>
+      <li><a href="{% url 'event-list' %}" class="hover:text-pink-500 transition">Events</a></li>
+      <li><a href="{% url 'category-list' %}" class="hover:text-pink-500 transition">Category</a></li>
+
+      {% if user.is_authenticated %}
+        
+        
+        <li>
+          {% if user.groups.first.name == "Admin" %}
+                <a href="{% url 'admin_dashboard' %}"
+                   class="hover:text-pink-500 transition">
+                   Dashboard
+                </a>
+            {% elif user.groups.first.name == "Organizer" %}
+                <a href="{% url 'organizer_dashboard' %}"
+                   class="hover:text-pink-500 transition">
+                   Dashboard
+                </a>
+            {% elif user.groups.first.name == "Participant" %}
+                <a href="{% url 'participant_dashboard' %}"
+                   class="hover:text-pink-500 transition">
+                   Dashboard
+                </a>
+            {% endif %}
+        </li>
+
+        
+        <li class="text-gray-600">
+          Hi, {{ user.username }}
+        </li>
+
+        
+        <li>
+          <a href="{% url 'sign_out' %}" class="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition">
+            Logout
+          </a>
+        </li>
+
+      {% else %}
+
+        
+        <li>
+          <a href="{% url 'sign_in' %}" class="hover:text-pink-500 transition">
+            Login
+          </a>
+        </li>
+
+        
+        <li>
+          <a href="{% url 'sign_up' %}" class="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition">
+            Register
+          </a>
+        </li>
+
+      {% endif %}
+    </ul>
 
     
     <div class="md:hidden">
       <button id="menu-btn" class="text-gray-900 focus:outline-none">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+        ☰
       </button>
     </div>
   </div>
 
   
-  <ul id="mobile-menu" class="hidden md:hidden bg-white/20 backdrop-blur-md px-6 py-4 space-y-3 shadow-lg">
-    <li><a href="/" class="block text-gray-800 hover:text-pink-500 transition-colors duration-300">Home</a></li>
-    <li><a href="{% url 'event-list' %}" class="block text-gray-800 hover:text-pink-500 transition-colors duration-300">Events</a></li>
-    <li><a href="{% url 'category-list' %}" class="block text-gray-800 hover:text-pink-500 transition-colors duration-300">Category</a></li>
-    <li><a href="{% url 'dashboard' %}" class="block bg-pink-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-pink-600 transition-colors duration-300">Dashboard</a></li>
+  <ul id="mobile-menu" class="hidden md:hidden bg-white px-6 py-4 space-y-3 shadow-lg">
+
+    <li><a href="/" class="block hover:text-pink-500">Home</a></li>
+    <li><a href="{% url 'event-list' %}" class="block hover:text-pink-500">Events</a></li>
+    <li><a href="{% url 'category-list' %}" class="block hover:text-pink-500">Category</a></li>
+
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'dashboard' %}" class="block hover:text-pink-500">Dashboard</a></li>
+        <li class="text-gray-600">Hi, {{ user.username }}</li>
+        <li><a href="{% url 'sign_out' %}" class="block bg-pink-500 text-white px-4 py-2 rounded-lg">Logout</a></li>
+    {% else %}
+        <li><a href="{% url 'sign_in' %}" class="block hover:text-pink-500">Login</a></li>
+        <li><a href="{% url 'sign_up' %}" class="block bg-pink-500 text-white px-4 py-2 rounded-lg">Register</a></li>
+    {% endif %}
   </ul>
 </nav>
-
 
 <script>
   const btn = document.getElementById('menu-btn');
   const menu = document.getElementById('mobile-menu');
-
   btn.addEventListener('click', () => {
     menu.classList.toggle('hidden');
   });
