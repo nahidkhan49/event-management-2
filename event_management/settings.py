@@ -104,8 +104,8 @@ import dj_database_url
 import os
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
+    'default': dj_database_url.config(
+        default='postgresql://event_amager_db_user:<encoded_password>@dpg-d554tf3uibrs738s9br0-a.oregon-postgres.render.com/event_amager_db?sslmode=require',
         conn_max_age=600,
         ssl_require=True
     )
