@@ -105,7 +105,7 @@ import os
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
+        default=os.environ.get('DATABASE_URL', 'postgresql://postgres:password@localhost:5432/event'),
         conn_max_age=600,
         ssl_require=True
     )
