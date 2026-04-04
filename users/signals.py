@@ -6,12 +6,19 @@ from django.core.mail import send_mail
 from django.conf import settings
 from urllib.parse import quote
 
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+
+
 
 @receiver(post_save, sender=User)
 def send_activation_email(sender,instance,created,**kwargs):
     if created:
-        token=default_token_generator.make_token(instance)
-        activation_link = f"https://event-management-2-3zlo.onrender.com/users/activate/{instance.id}/{quote(token)}"
+        uid = urlsafe_base64_encode(force_bytes(instance.pk))
+        token = default_token_generator.make_token(instance)
+        from urllib.parse import quote
+
+        activation_link = f"https://event-management-2-3zlo.onrender.com/users/activate/{uid}/{quote(token)}"
         
         send_mail(
             subject='Activation Your account',

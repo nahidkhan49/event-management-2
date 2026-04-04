@@ -76,16 +76,32 @@ def sign_out(request):
     return redirect("sign_in")
         
 
-def activate_user(request,user_id,token):
+# def activate_user(request,user_id,token):
+#     try:
+#         user=User.objects.get(id=user_id)
+#         if default_token_generator.check_token(user,token):
+#             user.is_active=True
+#             user.save()
+#             return redirect('sign_in')
+#         return HttpResponse("Invalid token")
+#     except User.DoesNotExist:
+#         return HttpResponse("user not found")
+
+from django.utils.http import urlsafe_base64_decode
+
+def activate(request, uidb64, token):
     try:
-        user=User.objects.get(id=user_id)
-        if default_token_generator.check_token(user,token):
-            user.is_active=True
-            user.save()
-            return redirect('sign_in')
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except:
+        user = None
+
+    if user and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return redirect('sign_in')
+    else:
         return HttpResponse("Invalid token")
-    except User.DoesNotExist:
-        return HttpResponse("user not found")
 
 @user_passes_test(is_admin, login_url='no_permission')
 def admin_dashboard(request):
