@@ -10,7 +10,7 @@ from django.conf import settings
 def send_activation_email(sender,instance,created,**kwargs):
     if created:
         token=default_token_generator.make_token(instance)
-        activation_link=f"http://127.0.0.1:8000/users/activate/{instance.id}/{token}"
+        activation_link = f"https://event-management-2-3zlo.onrender.com/users/activate/{instance.id}/{token}"
         
         send_mail(
             subject='Activation Your account',
