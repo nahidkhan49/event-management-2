@@ -9,7 +9,7 @@ from urllib.parse import quote
 
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-
+from django.core.mail import EmailMultiAlternatives
 
 
 @receiver(post_save, sender=User)
@@ -20,13 +20,15 @@ def send_activation_email(sender, instance, created, **kwargs):
 
         activation_link = f"https://event-management-2-3zlo.onrender.com/users/activate/{uid}/{token}/"
 
-        send_mail(
-            subject='Activate Your Account',
-            message=f'Hello {instance.username},\n\nClick to activate your account:\n{activation_link}',
+        email = EmailMultiAlternatives(
+            subject="Activate Your Account",
+            body=f"Hello {instance.username},\n\nClick this link:\n{activation_link}",
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[instance.email],
-            fail_silently=False
+            to=[instance.email]
         )
+
+        email.content_subtype = "plain"
+        email.send()
         
         
 @receiver(post_save,sender=User)
