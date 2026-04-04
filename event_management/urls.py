@@ -10,4 +10,4 @@ urlpatterns = [
     path("event/", include("event.urls")),
     path("users/", include("users.urls")),
     path('',home,name='home'),
-]+debug_toolbar_urls()
+]
