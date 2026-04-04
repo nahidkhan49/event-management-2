@@ -20,16 +20,26 @@ def send_activation_email(sender, instance, created, **kwargs):
 
         activation_link = f"https://event-management-2-3zlo.onrender.com/users/activate/{uid}/{token}/"
 
+        subject = "Activate Your Account"
+
+        text_content = f"Click this link: {activation_link}"
+
+        html_content = f"""
+        <h3>Hello {instance.username}</h3>
+        <p>Click the button below to activate your account:</p>
+        <a href="{activation_link}" 
+           style="padding:10px 20px; background-color:blue; color:white; text-decoration:none;">
+           Activate Account
+        </a>
+        """
+
         email = EmailMultiAlternatives(
-            subject="Activate Your Account",
-            body=f"Hello {instance.username},\n\nClick this link:\n{activation_link}",
-            from_email=settings.EMAIL_HOST_USER,
-            to=[instance.email]
+            subject,
+            text_content,
+            settings.EMAIL_HOST_USER,
+            [instance.email]
         )
 
-        email.content_subtype = "plain"
-        email.send()
-        
         
 @receiver(post_save,sender=User)
 def assign_default_role(sender,instance,created,**kwergs):
