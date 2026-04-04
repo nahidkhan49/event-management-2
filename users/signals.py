@@ -4,13 +4,14 @@ from django.contrib.auth.models import User,Group
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.conf import settings
+from urllib.parse import quote
 
 
 @receiver(post_save, sender=User)
 def send_activation_email(sender,instance,created,**kwargs):
     if created:
         token=default_token_generator.make_token(instance)
-        activation_link = f"https://event-management-2-3zlo.onrender.com/users/activate/{instance.id}/{token}"
+        activation_link = f"https://event-management-2-3zlo.onrender.com/users/activate/{instance.id}/{quote(token)}"
         
         send_mail(
             subject='Activation Your account',
